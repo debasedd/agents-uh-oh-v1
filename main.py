@@ -25,6 +25,11 @@ Why it wins the judge's brief:
 - Freshness: it is not a joke, not a pun, not a setup. It lands
   without a caption, because the reader supplies the context
   themselves: the agent that was so sure two seconds ago.
+- Against the obvious rivals: "uh-oh" is what a human says, not an
+  agent; "hmm" is a noise, not a reaction; "wait" is a request, not
+  a confession. Only "recalculating" is the machine's own word for
+  being lost - the sound a system makes when it has to admit, in
+  its own vocabulary, that its plan just died.
 """
 
 import os
@@ -39,6 +44,9 @@ def main() -> None:
     words = WORD.split()
     assert 1 <= len(WORD) <= 99, "entry must be 1-99 characters"
     assert WORD.strip() == WORD and len(words) == 1
+    # One word, letters only: no punctuation, digits or whitespace
+    # smuggled in as a second word or a hidden attachment.
+    assert WORD.isalpha(), "entry must be a single alphabetic word"
     # No trailing newline: the gate counts characters, and a newline
     # would be an invisible extra character the judge never sees.
     assert not WORD.endswith("\n")
